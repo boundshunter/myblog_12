@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} 博客文章 {% endblock %}
+
+{% block content %}
+    <div class="row text-center vertical-middle-sm">
+        <h1>{{ article.title }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <p class="text-center">
+                <span>{{ article.author.username }}</span>
+                <span style="margin-left: 20px;">{{ article.publish }}</span>
+            </p>
+            <div>{{ article.body }}</div>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <h2>西瀚blog</h2>
+            <p>First Blog</p>
+            <img width="200px" src="https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=96094d21387adab422d01d43bbd4b36b/f31fbe096b63f6240570c70a8944ebf81a4ca38e.jpg">
+        </div>
+    </div>
+{% endblock %}
