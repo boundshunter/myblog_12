@@ -14,9 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from . import views
+import django
+from django.contrib.auth import views as django_auth_views # django内部认证
 app_name = 'account'  # 增加app_name变量呼应 include中的namespace
 urlpatterns = [
-    re_path('^login/$', views.user_login, name="user_login"),
+    # re_path('^login/$', views.user_login, name="user_login"),
+    # path('login/', django_auth_views.LoginView.as_view(), name="user_login"), # 另一种写法如下
+    path('login/', django_auth_views.LoginView.as_view(), {"template_name": "account/login.html"}, name="user_login"),
+    # path('logout/', django_auth_views.LogoutView.as_view(), name="user_logout"),
+    path('logout/', django_auth_views.LogoutView.as_view(), {"template_name": "account/logout.html"}, name="user_logout"),
 ]

@@ -11,7 +11,12 @@
                 <li><a href="{% url 'blog_title' %}">My Blog</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'account:user_login' %}">LOGIN</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">{{ user.username }}</a></li>
+                    <li><a href="{% url 'account:user_logout' %}">注销</a></li>
+                {% else %}
+                    <li><a href="{% url 'account:user_login' %}">LOGIN</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
