@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} 注册用户 {% endblock %}
+
+{% block content %}
+    <div class="row text-center vertical-middls-sm">
+        <hi> 注册 </hi>
+        <p>如果有用户，请<strong><a href="{% url 'account:user_login' %}">登录</a></strong></p>
+        <p>或注册用户</p>
+        <form class="form-horizontal" action="." method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}" class="col-md-5 control-label">用户</label>
+                <div class="col-md-6 text-left">{{ form.username }}</div>
+            </div>
+             <div class="form-group">
+                <label for="{{ form.email.id_for_label }}" class="col-md-5 control-label">邮箱</label>
+                <div class="col-md-6 text-left">{{ form.email }}</div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}" class="col-md-5 control-label">密码</label>
+                <div class="col-md-6 text-left">{{ form.password }}</div>
+            </div>
+             <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}" class="col-md-5 control-label">确认密码</label>
+                <div class="col-md-6 text-left">{{ form.password2 }}</div>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg" value="REGISTER">
+        </form>
+    </div>
+
+{% endblock %}

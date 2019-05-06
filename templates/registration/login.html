@@ -1,66 +1,31 @@
-{% extends "admin/base_site.html" %}
-{% load i18n static %}
+{% extends 'base.html' %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}">
-{{ form.media }}
-{% endblock %}
+{% load staticfiles %}
 
-{% block bodyclass %}{{ block.super }} login{% endblock %}
-
-{% block usertools %}{% endblock %}
-
-{% block nav-global %}{% endblock %}
-
-{% block content_title %}{% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
-{% if form.errors and not form.non_field_errors %}
-<p class="errornote">
-{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-</p>
-{% endif %}
-
-{% if form.non_field_errors %}
-{% for error in form.non_field_errors %}
-<p class="errornote">
-    {{ error }}
-</p>
-{% endfor %}
-{% endif %}
-
-<div id="content-main">
-
-{% if user.is_authenticated %}
-<p class="errornote">
-{% blocktrans trimmed %}
-    You are authenticated as {{ username }}, but are not authorized to
-    access this page. Would you like to login to a different account?
-{% endblocktrans %}
-</p>
-{% endif %}
-
-<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-  <div class="form-row">
-    {{ form.username.errors }}
-    {{ form.username.label_tag }} {{ form.username }}
-  </div>
-  <div class="form-row">
-    {{ form.password.errors }}
-    {{ form.password.label_tag }} {{ form.password }}
-    <input type="hidden" name="next" value="{{ next }}">
-  </div>
-  {% url 'admin_password_reset' as password_reset_url %}
-  {% if password_reset_url %}
-  <div class="password-reset-link">
-    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-  </div>
-  {% endif %}
-  <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}">
-  </div>
-</form>
-
-</div>
+    <div class="row text-center vertical-middle-sm">
+        <h3>登录</h3>
+        <p>输入用户名和密码</p>
+        <form class="from-horizontal" action="{% url 'account:user_login' %}" method="POST">
+{#            url account为namespace  user_login为反常查找的名称，在account的命名空间中，查找名为user_login方法#}
+{#            此方法替代默认登录页#}
+            {% csrf_token %}
+{#            {{ form.as_p }}#}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}" class="col-md-5 control-label"
+                       style="color: red"><span class="glyphicon glyphicon-user"></span>Username</label>
+                <div class="col-md-6 text-left">{{ form.username }}</div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}" class="col-md-5 control-label" style="color:blue;">
+                    <span class="glyphicon glyphicon-floppy-open"></span>Password</label>
+                <div class="col-md-6 text-left">{{ form.password }}</div>
+            </div>
+            <div>
+            <input type="submit" value="Login" class="btn btn-primary btn-lg">
+            </div>
+        </form>
+    </div>
 {% endblock %}

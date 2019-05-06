@@ -15,7 +15,7 @@
                     <li><a href="#">{{ user.username }}</a></li>
                     <li><a href="{% url 'account:user_logout' %}">注销</a></li>
                 {% else %}
-                    <li><a href="{% url 'account:user_login' %}">LOGIN</a></li>
+                    <li><a href="{% url 'account:user_login' %}">登录</a></li>
                 {% endif %}
             </ul>
         </div>

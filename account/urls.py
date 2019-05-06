@@ -24,5 +24,6 @@ urlpatterns = [
     # path('login/', django_auth_views.LoginView.as_view(), name="user_login"), # 另一种写法如下
     path('login/', django_auth_views.LoginView.as_view(), {"template_name": "account/login.html"}, name="user_login"),
     # path('logout/', django_auth_views.LogoutView.as_view(), name="user_logout"),
-    path('logout/', django_auth_views.LogoutView.as_view(), {"template_name": "account/logout.html"}, name="user_logout"),
+    path('logout/', django_auth_views.LogoutView.as_view(), {"template_name": "account/logged_out.html"}, name="user_logout"),
+    re_path('^register/$', views.register, name="user_register")
 ]
