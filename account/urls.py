@@ -25,5 +25,7 @@ urlpatterns = [
     path('login/', django_auth_views.LoginView.as_view(), {"template_name": "account/login.html"}, name="user_login"),
     # path('logout/', django_auth_views.LogoutView.as_view(), name="user_logout"),
     path('logout/', django_auth_views.LogoutView.as_view(), {"template_name": "account/logged_out.html"}, name="user_logout"),
-    re_path('^register/$', views.register, name="user_register")
+    re_path('^register/$', views.register, name="user_register"),
+    re_path('^password-change/$', django_auth_views.PasswordChangeView.as_view(), name='password_change'),
+    re_path('^password-change-done/$', django_auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
 ]

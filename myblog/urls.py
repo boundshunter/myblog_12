@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('^$', views.blog_title, name="blog_title"),
     re_path('(?P<article_id>\d+)/$', views.blog_article, name="blog_detail"),
-    re_path('^account/', include('account.urls', namespace='account', )),
+    re_path('^accounts/', include('account.urls', namespace='account', )),
 ]
