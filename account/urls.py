@@ -28,4 +28,24 @@ urlpatterns = [
     re_path('^register/$', views.register, name="user_register"),
     re_path('^password-change/$', django_auth_views.PasswordChangeView.as_view(), name='password_change'),
     re_path('^password-change-done/$', django_auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
+    re_path('^password-reset/$', django_auth_views.PasswordResetView.as_view(),
+            {"template_name": "account/password_reset_form.html",
+             "email_template_name": "account/password_reset_email.html",
+             "subject_template_name": "account/password_reset_subject.txt",
+             "post_reset_redirect": "/account/password-reset-done"},
+            name='password_reset'),
+
+    re_path('^password-reset-done/$', django_auth_views.PasswordResetDoneView.as_view(),
+            {"template_name":"account/password_reset_done.html"},
+            name='password_reset_done'),
+
+    re_path('^password-reset-confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$',
+            django_auth_views.PasswordResetConfirmView.as_view(),
+            {"template_name": "account/password_reset_confirm.html",
+             "post_reset_redirect": "/account/password-reset-complete"},
+            name="password_reset_confirm"),
+
+    re_path('^password-reset-complete/$', django_auth_views.PasswordResetCompleteView.as_view(),
+            {"template_name": "account/password_reset_complete.html"},
+            name="password_reset_complete"),
 ]

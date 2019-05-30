@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, RegistrationForm, UserProfileForm
-
 # Create your views here.
 # authenticate, login 内置方法，用户认证和管理应用
 
