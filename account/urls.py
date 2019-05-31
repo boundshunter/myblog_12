@@ -48,4 +48,6 @@ urlpatterns = [
     re_path('^password-reset-complete/$', django_auth_views.PasswordResetCompleteView.as_view(),
             {"template_name": "account/password_reset_complete.html"},
             name="password_reset_complete"),
+
+    re_path('^my-information/$', views.myself, name="my_infomation")
 ]
